@@ -25,8 +25,11 @@ public class Workshop {
     public int[] tablaMultiplicar(int numero, int limite) {
         // TODO: Implementar el método para retornar la tabla de multiplicar del número dado.
         // Ejemplo: Si numero = 2 y limite = 5, el resultado debería ser [2, 4, 6, 8, 10].
-        
-        return new int[0];
+        int[] tabla = new int [limite];
+        for(int i =1; i <= limite; i++){
+           tabla[i -1] = numero * i
+     }
+        return tabla;
     }
 
     // Método que calcula el factorial de un número entero
@@ -34,14 +37,30 @@ public class Workshop {
         // TODO: Implementar el método para calcular el factorial de un número entero.
         // Ejemplo: Si n = 5, el resultado debería ser 120.
         // Lanzar IllegalArgumentException si n es negativo.
-        return 0;
+        if ( n < 0){
+          throw new
+        IllegalArgumentException ("El numero no puede ser negativo");
+        }
+        int resultado = 1 ;
+        for(int i = 1; i <= n; i++){
+         resultado = resultado * i;
+      }
+        return resultado;
     }
 
     // Método que verifica si un número es primo
     public boolean esPrimo(int numero) {
         // TODO: Implementar el método para verificar si un número es primo.
         // Ejemplo: Si numero = 7, el resultado debería ser true.
-        return false;
+        if (numero <= 1){
+          return false;
+      }
+        for(int i = 2; i < numero; i++){
+          it(numero % i==0){
+            return false;
+           }
+      }
+        return true;
     }
 
     // Método que genera una serie de Fibonacci
@@ -49,41 +68,80 @@ public class Workshop {
         // TODO: Implementar el método para generar la serie de Fibonacci hasta el número n.
         // Ejemplo: Si n = 5, el resultado debería ser [0, 1, 1, 2, 3].
         // Lanzar IllegalArgumentException si n es negativo.
-        return new int[0];
+        if(n < 0){
+          throw new
+        IllegalArgumentException("El numero no puede ser negativo")
+       }
+        int[] serie = new int [n];
+        if(n > 0){
+          serie[0] = 0;
+        }
+        if (n > 1){
+           serie[1] = 1;
+        }
+        for(int i = 2; i < n; i++){
+           serie [i] = serie [i-1] + serie [i - 2];
+        }
+        return serie;
     }
 
     // Método que suma todos los elementos de un arreglo
     public int sumaElementos(int[] arreglo) {
         // TODO: Implementar el método para sumar todos los elementos de un arreglo.
         // Ejemplo: Si arreglo = [1, 2, 3, 4, 5], el resultado debería ser 15.
-        return 0;
+        int suma = 0;
+        for (int i = 0; i < arreglo.length; i++){
+           suma = suma + arreglo[i];
+        }
+        return suma;
     }
 
     // Método que calcula el promedio de los elementos de un arreglo
     public double promedioElementos(int[] arreglo) {
         // TODO: Implementar el método para calcular el promedio de los elementos de un arreglo.
         // Ejemplo: Si arreglo = [1, 2, 3, 4, 5], el resultado debería ser 3.0.
-        return 0.0;
+        int suma = 0;
+        for (int i = 0; i < arreglo.length; i++){
+           suma = suma + arreglo[i];
+      }
+        return (double) suma /arreglo.length;
     }
 
     // Método que encuentra el elemento mayor en un arreglo
     public int encontrarElementoMayor(int[] arreglo) {
         // TODO: Implementar el método para encontrar el elemento mayor en un arreglo.
         // Ejemplo: Si arreglo = [1, 2, 3, 4, 5], el resultado debería ser 5.
-        return 0;
+        int mayor = arreglo[0];
+        for (int i = 1; i < arreglo.length; i++){
+          if (arreglo[i] > mayor){
+              mayor = arreglo[i];
+           }
+        }
+        return mayor;
     }
 
     // Método que encuentra el elemento menor en un arreglo
     public int encontrarElementoMenor(int[] arreglo) {
         // TODO: Implementar el método para encontrar el elemento menor en un arreglo.
         // Ejemplo: Si arreglo = [1, 2, 3, 4, 5], el resultado debería ser 1.
-        return 0;
+        int menor = arreglo[0];
+        for (int i = 1; i < arreglo.length; i++){
+          if (arreglo[i] < menor){
+              menor = arreglo[i];
+           }
+        }
+        return menor;
     }
 
     // Método que busca un elemento en un arreglo
     public boolean buscarElemento(int[] arreglo, int elemento) {
         // TODO: Implementar el método para buscar un elemento en un arreglo.
         // Ejemplo: Si arreglo = [1, 2, 3, 4, 5] y elemento = 3, el resultado debería ser true.
+        for (int i = 0; i < arreglo.length; i++){
+            if (arreglo[i] == elemento){
+              return true;
+           }
+        }
         return false;
     }
 
@@ -91,49 +149,98 @@ public class Workshop {
     public int[] invertirArreglo(int[] arreglo) {
         // TODO: Implementar el método para invertir un arreglo.
         // Ejemplo: Si arreglo = [1, 2, 3, 4, 5], el resultado debería ser [5, 4, 3, 2, 1].
-        return new int[0];
+        int[] invertido = new int[arreglo.length];
+        for(int i = 0; i < arreglo.length; i++){
+          invertido[i] = arreglo[arreglo.length - 1 - i];
+        }
+        return invertido;
     }
 
     // Método que ordena un arreglo en orden ascendente
     public int[] ordenarArreglo(int[] arreglo) {
         // TODO: Implementar el método para ordenar un arreglo en orden ascendente.
         // Ejemplo: Si arreglo = [5, 4, 3, 2, 1], el resultado debería ser [1, 2, 3, 4, 5].
-        return new int[0];
+        for (int i = 0; i < arreglo.length; i++){
+          for (int j = i+1; j < arreglo.length; j++){
+              if (arreglo[i] > arreglo [j]){
+                 int temp = arreglo[i];
+                 arreglo[i] = arreglo[j];
+                 arreglo[j] = temp;
+               }
+           }
+       }
+        return arreglo;
     }
 
     // Método que elimina los duplicados de un arreglo
     public int[] eliminarDuplicados(int[] arreglo) {
         // TODO: Implementar el método para eliminar los duplicados de un arreglo.
         // Ejemplo: Si arreglo = [1, 2, 2, 3, 4, 4, 5], el resultado debería ser [1, 2, 3, 4, 5].
-        return new int[0];
+        int[] temp = new int[arreglo.length];
+        int contador = 0;
+        for(int i = 0; i < arreglo.length; i++){
+           boolean duplicado = false;
+            for(int j = 0; j < contador; j++){
+               if (arreglo[i] == temp[j]){
+                  duplicado = true;
+                  break;
+               }
+           }
+           if(! duplicado){
+              temp[contador] = arreglo[i];
+              contador++;
+           }
+        }
+        int[] resultado = new int[contador];
+        for (int i = 0; i < contador; i++){
+            resultado[i] = temp[i];
+         }    
+
+        return resultado;
     }
 
     // Método que combina dos arreglos en uno solo
     public int[] combinarArreglos(int[] arreglo1, int[] arreglo2) {
         // TODO: Implementar el método para combinar dos arreglos en uno solo.
         // Ejemplo: Si arreglo1 = [1, 2, 3, 4, 5] y arreglo2 = [6, 7, 8], el resultado debería ser [1, 2, 3, 4, 5, 6, 7, 8].
-        return new int[0];
+        int[] resultado = new int[arreglo1.length + arreglo2.length];
+        for (int i = 0; i < arreglo1.length; i++) {
+             resultado[i] = arreglo1[i];
+           }
+        for (int i = 0; i < arreglo2.length; i++) {
+             resultado[arreglo1.length + i] = arreglo2[i];
+           }
+        return resultado;
     }
 
     // Método que rota un arreglo n posiciones
     public int[] rotarArreglo(int[] arreglo, int posiciones) {
         // TODO: Implementar el método para rotar un arreglo n posiciones.
         // Ejemplo: Si arreglo = [1, 2, 3, 4, 5] y posiciones = 2, el resultado debería ser [3, 4, 5, 1, 2].
-        return new int[0];
+        int n = arreglo.length;
+        int[] resultado = new int[n];
+        for (int i = 0; i < n; i++) {
+            resultado[i] = arreglo[(i + posiciones) % n];
+          }
+        return resultado;
     }
 
     // Método que cuenta los caracteres en una cadena
     public int contarCaracteres(String cadena) {
         // TODO: Implementar el método para contar el número de caracteres en una cadena.
         // Ejemplo: Si cadena = "Hello", el resultado debería ser 5.
-        return 0;
+        return cadena.length();
     }
 
     // Método que invierte una cadena
     public String invertirCadena(String cadena) {
         // TODO: Implementar el método para invertir una cadena.
-        // Ejemplo: Si cadena = "Hello", el resultado debería ser "olleH".
-        return "";
+        // Ejemplo: Si cadena = "Hello", el resultado debería ser "olleH".}
+        String invertida = "";
+        for (int i = cadena.length() - 1; i >= 0; i--){
+             invertida = invertida + cadena.charAt(i);
+           }
+        return invertida;
     }
 
     // Método que verifica si una cadena es un palíndromo
