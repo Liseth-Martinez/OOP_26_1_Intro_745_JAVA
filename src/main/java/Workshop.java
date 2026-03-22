@@ -247,41 +247,109 @@ public class Workshop {
     public boolean esPalindromo(String cadena) {
         // TODO: Implementar el método para verificar si una cadena es un palíndromo.
         // Ejemplo: Si cadena = "madam", el resultado debería ser true.
-        return false;
+        int inicio = 0;
+        int fin = cadena.length() -1;
+        while (inicio < fin){
+          if (cadena.charAt(inicio) != cadena.charAt (fin)){
+             return false;
+           }
+          inicio ++;
+          fin--;
+          }
+        return true;
     }
 
     // Método que cuenta el número de palabras en una cadena
     public int contarPalabras(String cadena) {
         // TODO: Implementar el método para contar el número de palabras en una cadena.
         // Ejemplo: Si cadena = "Este es un test", el resultado debería ser 4.
-        return 0;
+        int contador = 0;
+        boolean enPalabra = false;
+        for(int i = 0; i < cadena.length(); i++){
+          if(cadena.charAt(i) != ''){
+            if(! enPalabra){
+                contador++;
+                enPalabra = true;
+               }
+            }else{
+               enPalabra = false;
+               }
+            }
+        return contador;
     }
 
     // Método que convierte una cadena a mayúsculas
     public String convertirAMayusculas(String cadena) {
         // TODO: Implementar el método para convertir una cadena a mayúsculas.
         // Ejemplo: Si cadena = "hello", el resultado debería ser "HELLO".
-        return "";
+        String resultado = "";
+        for(int i = 0; i < cadena.length(); i++){
+            char c = cadena.charAt(i);
+            if(c >= 'a' && c <= 'z'){
+                c = (char) (c - 32);
+             }
+             resultado += c;
+          }
+        return resultado;
     }
 
     // Método que convierte una cadena a minúsculas
     public String convertirAMinusculas(String cadena) {
         // TODO: Implementar el método para convertir una cadena a minúsculas.
         // Ejemplo: Si cadena = "HELLO", el resultado debería ser "hello".
-        return "";
+        String resultado = "";
+        for(int i = 0; i < cadena.length(); i++){
+            char c = cadena.charAt(i);
+            if(c >= 'A' && c <= 'Z'){
+                c = (char) (c - 32);
+             }
+             resultado += c;
+          }
+
+        return resultado;
     }
 
     // Método que reemplaza una subcadena en una cadena por otra subcadena
     public String reemplazarSubcadena(String cadena, String antiguaSubcadena, String nuevaSubcadena) {
         // TODO: Implementar el método para reemplazar una subcadena en una cadena por otra subcadena.
         // Ejemplo: Si cadena = "Hello Java", antiguaSubcadena = "Java", y nuevaSubcadena = "world", el resultado debería ser "Hello world".
-        return "";
+        String resultado = " ";
+        for (int i = 0; i < cadena.length(), i++){
+         boolean coincide = true;
+          if(i + antiguaSubcadena.length() <= cadena.length()){
+           for(int j = 0; j < antiguaSubcadena.length(); j++){
+             if(cadena.charAt(i + j) != antiguaSubcadena.charAt(j)){
+              coincide = false;
+               break;
+              }
+           }
+           if (coincide){
+              resultado += nuevaSubcadena;
+              i += antiguaSubcadena.length() -1;
+                 continue;
+               }
+            }
+             resultado += cadena.charAt(i);
+         }
+        return resultado;
     }
 
     // Método que busca una subcadena en una cadena y retorna su índice
     public int buscarSubcadena(String cadena, String subcadena) {
         // TODO: Implementar el método para buscar una subcadena en una cadena y retornar su índice.
         // Ejemplo: Si cadena = "Hello world" y subcadena = "world", el resultado debería ser 6.
+        for(int i = 0; i <= cadena.length() - subcadena.length(); i++){
+          boolean coincide = true;
+          for(int j = 0; j < subcadena.length(); j++){
+           if(cadena.charAt(i + j) != subcadena.charAt(j)){
+             coincide = false;
+             break;
+            }
+         }
+         if (coincide){
+          return i;
+         }
+       }
         return -1;
     }
 
