@@ -185,8 +185,9 @@ public class Workshop {
     public int[] rotarArreglo(int[] arreglo, int posiciones) {
         int n = arreglo.length;
         int[] resultado = new int[n];
+        posiciones = ((posiciones % n)+ n) % n;
         for (int i = 0; i < n; i++) {
-            resultado[i] = arreglo[(i + posiciones) % n];
+            resultado[(i + posiciones) % n] = arreglo[i];
           }
         return resultado;
     }
@@ -200,17 +201,18 @@ public class Workshop {
     public String invertirCadena(String cadena) {
         String invertida = "";
         for (int i = cadena.length() - 1; i >= 0; i--){
-             invertida = invertida + cadena.charAt(i);
+            invertida += cadena.charAt(i);
            }
         return invertida;
     }
 
     // Método que verifica si una cadena es un palíndromo
     public boolean esPalindromo(String cadena) {
+        cadena = cadena.toLowerCase().replace(" ", "");
         int inicio = 0;
         int fin = cadena.length() -1;
         while (inicio < fin){
-          if (cadena.charAt(inicio) != cadena.charAt (fin)){
+          if (cadena.charAt(inicio) != cadena.charAt(fin)){
              return false;
            }
           inicio ++;
@@ -267,24 +269,24 @@ public class Workshop {
 
     // Método que reemplaza una subcadena en una cadena por otra subcadena
     public String reemplazarSubcadena(String cadena, String antiguaSubcadena, String nuevaSubcadena) {
-        String resultado = " ";
-        for (int i = 0; i < cadena.length();i++){
-         boolean coincide = true;
-          if(i + antiguaSubcadena.length() <= cadena.length()){
-           for(int j = 0; j < antiguaSubcadena.length(); j++){
-             if(cadena.charAt(i + j) != antiguaSubcadena.charAt(j)){
-              coincide = false;
-               break;
-              }
-           }
-           if (coincide){
-              resultado += nuevaSubcadena;
-              i += antiguaSubcadena.length() -1;
-                 continue;
-               }
+        String resultado = "";
+        for (int i = 0; i < cadena.length(); i++) {
+            boolean coincide = true;
+            if (i + antiguaSubcadena.length() <= cadena.length()) {
+                for (int j = 0; j < antiguaSubcadena.length(); j++) {
+                    if (cadena.charAt(i + j) != antiguaSubcadena.charAt(j)) {
+                        coincide = false;
+                        break;
+                    }
+                }
+                if (coincide) {
+                    resultado += nuevaSubcadena;
+                    i += antiguaSubcadena.length() - 1;
+                    continue;
+                }
             }
-             resultado += cadena.charAt(i);
-         }
+            resultado += cadena.charAt(i);
+        }
         return resultado;
     }
 
@@ -307,12 +309,15 @@ public class Workshop {
 
     // Método que valida un correo electrónico
     public boolean validarCorreoElectronico(String correo) {
-        return correo.contains("@") && correo.contains(".");
+        return correo.matches("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}");
     }
 
     // Método que calcula el promedio de una lista de números
 
     public double promedioLista(List<Integer> lista) {
+        if (lista.isEmpty()){
+            return 0.0;
+        }
         int suma = 0;
         for (int numero : lista) {
             suma += numero;
@@ -322,50 +327,62 @@ public class Workshop {
 
     // Método que convierte un número en su representación binaria
     public String convertirABinario(int numero) {
+        if (numero < 0){
+            return "-" + Integer.toBinaryString(-numero);
+        }
         return Integer.toBinaryString(numero);
     }
 
     // Método que convierte un número en su representación hexadecimal
     public String convertirAHexadecimal(int numero) {
+        if (numero < 0){
+            return "-" + Integer.toHexString(-numero).toUpperCase();
+        }
         return Integer.toHexString(numero).toUpperCase();
     }
 
     // Método para el juego de piedra, papel, tijera, lagarto, Spock
     public String jugarPiedraPapelTijeraLagartoSpock(String eleccionUsuario) {
-        // TODO: Implementar el método para el juego de Piedra, Papel, Tijera, Lagarto, Spock.
-        // Las reglas del juego son:
-        // - Piedra vence a Tijera y Lagarto
-        // - Papel vence a Piedra y Spock
-        // - Tijera vence a Papel y Lagarto
-        // - Lagarto vence a Spock y Papel
-        // - Spock vence a Tijera y Piedra
+        String eleccionComputadora = "Piedra";
+        if (eleccionUsuario.equals(eleccionComputadora)) {
+            return "Empate";
+        }
+        if ((eleccionUsuario.equals ("Piedra") &&
+                (eleccionComputadora.equals("Tijera") || eleccionComputadora.equals("Lagarto"))) ||
 
+                (eleccionUsuario.equals("Papel") &&
+                        (eleccionComputadora.equals("Piedra") || eleccionComputadora.equals("Spock"))) ||
 
-        // El método debe retornar un mensaje indicando el resultado del juego.
-        // Ejemplo: Si la eleccionUsuario es "Piedra", el resultado podría ser "Ganaste" o "Perdiste" dependiendo de la elección de la computadora.
-        return "";
+                (eleccionUsuario.equals("Tijera") &&
+                        (eleccionComputadora.equals("Papel") || eleccionComputadora.equals("Lagarto"))) ||
+
+                (eleccionUsuario.equals("Lagarto") &&
+                        (eleccionComputadora.equals("Papel") || eleccionComputadora.equals("Spock"))) ||
+
+                (eleccionUsuario.equals("Spock") &&
+                        (eleccionComputadora.equals("Piedra") || eleccionComputadora.equals("Tijera")))) {
+
+            return "Ganaste";
+        }
+        return "Perdiste";
+
     }
 
     public String pptls2(String game[]) {
-        //Retornar player ganador o empate
-            /*
-            Rock = R
-            Paper = P
-            Scissors = S
-            Lizard = L
-            Spock = V
-        Scissors cuts Paper
-Paper covers Rock
-Rock crushes Lizard
-Lizard poisons Spock
-Spock smashes Scissors
-Scissors decapitates Lizard
-Lizard eats Paper
-Paper disproves Spock
-Spock vaporizes Rock
-Rock crushes Scissors
-         */
-        return "";
+        String p1 = game[0];
+        String p2 = game[1];
+
+        if (p1.equals(p2)) {
+            return "Empate";
+        }
+        if ((p1.equals("R") && (p2.equals("L") || p2.equals("S"))) ||
+                (p1.equals("P") && (p2.equals("R") || p2.equals("V"))) ||
+                (p1.equals("S") && (p2.equals("P") || p2.equals("L"))) ||
+                (p1.equals("L") && (p2.equals("P") || p2.equals("V"))) ||
+                (p1.equals("V") && (p2.equals("R") || p2.equals("S")))) {
+            return "Player 1";
+        }
+        return "Player 2";
     }
 
     public double areaCirculo(double radio) {
@@ -373,12 +390,20 @@ Rock crushes Scissors
     }
 
     public String zoodiac(int day, int month) {
+        if (month < 1 || month > 12 || day < 1)
+            return "Invalid Date";
+
+        int[] diasMes = {31,28,31,30,31,30,31,31,30,31,30,31};
+
+        if (day > diasMes[month - 1])
+            return "Invalid Date";
+
         if ((month == 3 && day >= 21) || (month == 4 && day <= 19))
             return "Aries";
         if ((month == 4 && day >= 20) || (month == 5 && day <= 20))
-            return "Tauro";
+            return "Taurus";
         if ((month == 5 && day >= 21) || (month == 6 && day <= 20))
-            return "Geminis";
+            return "Gemini";
         if ((month == 6 && day >= 21) || (month == 7 && day <= 22))
             return "Cancer";
         if ((month == 7 && day >= 23) || (month == 8 && day <= 22))
@@ -388,14 +413,15 @@ Rock crushes Scissors
         if ((month == 9 && day >= 23) || (month == 10 && day <= 22))
             return "Libra";
         if ((month == 10 && day >= 23) || (month == 11 && day <= 21))
-            return "Escorpio";
+            return "Scorpio";
         if ((month == 11 && day >= 22) || (month == 12 && day <= 21))
-            return "Sagitario";
-        if ((month ==12 && day >= 22) || (month == 1 && day <= 19))
-            return "Capricornio";
+            return "Sagittarius";
+        if ((month == 12 && day >= 22) || (month == 1 && day <= 19))
+            return "Capricorn";
         if ((month == 1 && day >= 20) || (month == 2 && day <= 18))
-            return "Acuario";
-        return "Piscis";
+            return "Aquarius";
+
+        return "Pisces";
     }
 }
 
